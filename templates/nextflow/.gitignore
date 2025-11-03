@@ -1,0 +1,19 @@
+# data
+data/*
+!data/samples/checksum.blake3
+!data/samples/meta.csv
+
+# Nextflow execution reports and logs
+work/
+outputs/
+logs/
+reports/
+
+# Nix
+result
+
+# cache
+.nextflow/
+.direnv/
+.jj/
+.ruff_cache/
