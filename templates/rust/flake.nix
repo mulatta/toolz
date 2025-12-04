@@ -36,6 +36,7 @@
 
   inputs = {
     # keep-sorted start
+    crane.url = "github:ipetkov/crane";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
     flake-parts.url = "github:hercules-ci/flake-parts";
     gitignore.inputs.nixpkgs.follows = "nixpkgs";

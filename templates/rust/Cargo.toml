@@ -1,34 +1,32 @@
 [package]
 name = "PROJ_NAME"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
 authors = ["AUTHOR MAIL_ADDRESS"]
 description = "DESCRIPTION"
 license = "MIT"
 repository = "https://github.com/yourusername/PROJ_NAME"
-homepage = "https://github.com/yourusername/PROJ_NAME"
-documentation = "https://docs.rs/PROJ_NAME"
 readme = "README.md"
 
 [dependencies]
-# needletail = "0.5"
-# rayon = "1.8"
-# arrow = "53.0"
-# parquet = "53.0"
-# flate2 = "1.0"
-# ahash = "0.8"
+# Common dependencies (uncomment as needed)
 # clap = { version = "4.5", features = ["derive"] }
-# indicatif = "0.17"
+# serde = { version = "1.0", features = ["derive"] }
 # anyhow = "1.0"
-# csv = "1.4.0"
-# num_cpus = "1.17.0"
+# thiserror = "2.0"
+# tokio = { version = "1", features = ["full"] }
+# tracing = "0.1"
 
 [features]
-# simd = []
-# default = []
+default = []
 
 [profile.release]
-# opt-level = 3
-# lto = true
-# codegen-units = 1
-# strip = true
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
