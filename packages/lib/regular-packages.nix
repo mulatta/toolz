@@ -11,6 +11,7 @@ in
   {
     # Cross-platform packages
     aptasuite = callPackage (byNamePackage "aptasuite") {};
+    capr = callPackage (byNamePackage "capr") {};
     bbtools = callPackage (byNamePackage "bbtools") {};
     edirect = callPackage (byNamePackage "edirect") {};
     fastaptamer = callPackage (byNamePackage "fastaptamer") {};
