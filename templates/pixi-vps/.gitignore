@@ -1,0 +1,15 @@
+# cache
+.direnv/*
+.jj/*
+
+# rust
+.cargo/*
+!./cargo/config.toml
+
+# build result
+target/
+result
+
+# pixi environments
+.pixi/*
+!.pixi/config.toml
