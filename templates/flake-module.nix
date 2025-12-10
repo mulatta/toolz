@@ -26,11 +26,6 @@
       description = "Basic toolz uv project template";
       inherit welcomeText;
     };
-    uv2nix = {
-      path = ./uv2nix;
-      description = "Basic toolz uv2nix project template";
-      inherit welcomeText;
-    };
     default = {
       path = ./nix;
       description = "Basic toolz nix project template";

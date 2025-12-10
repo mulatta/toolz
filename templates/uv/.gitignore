@@ -1,15 +1,30 @@
-# cache
-.direnv/*
-.jj/*
+# Python
+__pycache__/
+*.so
+dist/
+eggs/
+.eggs/
+lib/
+lib64/
+sdist/
+var/
+wheels/
+*.egg-info/
+*.egg
 
-# rust
-.cargo/*
-!./cargo/config.toml
+# Virtual environments
+.venv/
 
-# build result
-target/
+# Type checking
+.mypy_cache/
+
+# Nix
 result
+result-*
 
-# pixi environments
-.pixi/*
-!.pixi/config.toml
+# direnv
+.direnv/
+
+# OS
+.DS_Store
+Thumbs.db
