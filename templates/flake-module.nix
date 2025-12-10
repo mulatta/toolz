@@ -26,6 +26,11 @@
       description = "Basic toolz uv project template";
       inherit welcomeText;
     };
+    uv-vps = {
+      path = ./uv-vps;
+      description = "Basic toolz uv-vps project template";
+      inherit welcomeText;
+    };
     default = {
       path = ./nix;
       description = "Basic toolz nix project template";
