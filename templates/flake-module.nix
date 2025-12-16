@@ -31,6 +31,11 @@
       description = "Basic toolz nix project template";
       inherit welcomeText;
     };
+    marimo = {
+      path = ./marimo;
+      description = "Marimo reactive notebook project using uv2nix";
+      inherit welcomeText;
+    };
   };
 
   perSystem = {pkgs, ...}: {
