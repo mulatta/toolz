@@ -1,5 +1,5 @@
 {
-  description = "Python project template using uv2nix";
+  description = "PROJ_NAME - Python project using uv2nix";
 
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {

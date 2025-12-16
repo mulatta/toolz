@@ -1,5 +1,5 @@
 {
-  description = "Pixi Project Template";
+  description = "PROJ_NAME - Pixi project";
 
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {

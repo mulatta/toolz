@@ -1,5 +1,5 @@
 {
-  description = "Marimo reactive notebook project using uv2nix";
+  description = "PROJ_NAME - Marimo notebook project";
 
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {

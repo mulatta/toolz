@@ -41,7 +41,7 @@
   perSystem = {pkgs, ...}: {
     # Template initialization app
     # Usage: nix run .#init-template -- <project-name> [directory]
-    apps.init-template = {
+    apps.init = {
       type = "app";
       program = "${pkgs.writeShellApplication {
         name = "init-template";

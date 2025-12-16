@@ -1,5 +1,5 @@
 {
-  description = "Rust Project Template";
+  description = "PROJ_NAME - Rust project";
 
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {

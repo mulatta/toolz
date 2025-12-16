@@ -1,5 +1,5 @@
 {
-  description = "Project Template";
+  description = "PROJ_NAME";
 
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
