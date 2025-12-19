@@ -24,6 +24,7 @@ in
       jax-cuda12-plugin = pySelf.callPackage (byNamePackage "jax-cuda12-plugin") {};
       jax-triton = pySelf.callPackage (byNamePackage "jax-triton") {};
       logging-exceptions = pySelf.callPackage (byNamePackage "logging-exceptions") {};
+      logomaker = pySelf.callPackage (byNamePackage "logomaker") {};
       mkdocs-static-i18n = pySelf.callPackage (byNamePackage "mkdocs-static-i18n") {};
       numba-cuda = pySelf.callPackage (byNamePackage "numba-cuda") {};
       nupack = pySelf.callPackage (byNamePackage "nupack") {};
