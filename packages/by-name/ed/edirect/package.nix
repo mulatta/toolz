@@ -11,17 +11,58 @@
   gzip,
   autoPatchelfHook,
 }:
+let
+  version = "25.0.20260124";
+  baseUrl = "https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/versions/${version}";
+
+  platform =
+    if stdenv.isLinux then
+      "Linux"
+    else if stdenv.isDarwin && stdenv.isx86_64 then
+      "Darwin"
+    else if stdenv.isDarwin && stdenv.isAarch64 then
+      "Silicon"
+    else
+      throw "Unsupported platform";
+
+  binHashes = {
+    xtract = {
+      Linux = "sha256-lL6Ha1E7acZkp2qaz1Prcmtd6aDUzgT0cxsv0lATaT4=";
+      Darwin = "sha256-9e0oB4/WH3PzSwMrZT7VNpB5THjTaL7Su5WEDjEKyew=";
+      Silicon = "sha256-kmEcvbomPnOL+Jh6XJngyfRAE03aTZIEUrvJ8Def7Lc=";
+    };
+    rchive = {
+      Linux = "sha256-HRUBrX9p9Zm0X18F1d4hI812dB79dXmD6bnEt8iYWo4=";
+      Darwin = "sha256-9lfuTDm8keIfw9SCG6ShPqgV/BASjuLIna0igwyALio=";
+      Silicon = "sha256-8t5PJQaLYb6DyxRC2SCteDLS34kf/pzU80pXCaOM/U0=";
+    };
+    transmute = {
+      Linux = "sha256-pC6QJIeufmPgvBPSSkuAxcIVkMPdMs9rBs/QBeBN9CA=";
+      Darwin = "sha256-lLv3c9+Y5Z+UEJ4Le2hfVYxkb2rqI/c3qJL33xkN3PE=";
+      Silicon = "sha256-zRgivL1U7TSDTKWk/oeh87BeDQSy1GKW5a9lLfsR5RI=";
+    };
+  };
+
+  fetchBin =
+    name:
+    fetchurl {
+      url = "${baseUrl}/${name}.${platform}.gz";
+      sha256 = binHashes.${name}.${platform};
+    };
+in
 stdenv.mkDerivation {
   pname = "edirect";
-  version = "24.2";
+  inherit version;
 
   src = fetchurl {
-    url = "https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/edirect.tar.gz";
-    sha256 = "sha256-z7Z+/wqxUwyAl83buY44iwCbt5oRcDP563k0W+SN6Gk=";
+    url = "${baseUrl}/edirect.tar.gz";
+    sha256 = "sha256-sUobkER6My5ZuKfXhKf4Q6A2xnpkNGlDfkCOuotd+X4=";
   };
 
   nativeBuildInputs = [
     makeWrapper
+  ]
+  ++ lib.optionals stdenv.isLinux [
     autoPatchelfHook
   ];
 
@@ -34,30 +75,9 @@ stdenv.mkDerivation {
 
   postUnpack =
     let
-      platform =
-        if stdenv.isLinux then
-          "Linux"
-        else if stdenv.isDarwin && stdenv.isx86_64 then
-          "Darwin"
-        else if stdenv.isDarwin && stdenv.isAarch64 then
-          "Silicon"
-        else
-          throw "Unsupported platform";
-
-      xtractBin = fetchurl {
-        url = "https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/xtract.${platform}.gz";
-        sha256 = "sha256-L8xHH5ciUCJkKlRE7EKG46paLA0xaBpslfpOT6FI7FI=";
-      };
-
-      rchiveBin = fetchurl {
-        url = "https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/rchive.${platform}.gz";
-        sha256 = "sha256-D4+pnM1r5shmf/wgaoX8Rbk4K2xBVrMj/UHnPGqTjFk=";
-      };
-
-      transmuteBin = fetchurl {
-        url = "https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/transmute.${platform}.gz";
-        sha256 = "sha256-bgbxyJ8GzEG/IgBu1HPeYSlSlYB7Ci5Uz5NAhEUsm1c=";
-      };
+      xtractBin = fetchBin "xtract";
+      rchiveBin = fetchBin "rchive";
+      transmuteBin = fetchBin "transmute";
     in
     ''
 
