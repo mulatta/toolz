@@ -20,9 +20,10 @@ buildPythonPackage rec {
     python = "cp312";
     abi = "cp312";
     platform =
-      if stdenv.hostPlatform.isAarch64
-      then "manylinux_2_24_aarch64.manylinux_2_28_aarch64"
-      else "manylinux_2_24_x86_64.manylinux_2_28_x86_64";
+      if stdenv.hostPlatform.isAarch64 then
+        "manylinux_2_24_aarch64.manylinux_2_28_aarch64"
+      else
+        "manylinux_2_24_x86_64.manylinux_2_28_x86_64";
     hash = "sha256-WJqkdpyRkKOHKzQXD7bCbQ9ngoFA+I0gBI3PZ+cxzUc=";
   };
 
@@ -57,7 +58,10 @@ buildPythonPackage rec {
     description = "Python bindings for libcudf - GPU-accelerated dataframe operations";
     homepage = "https://github.com/rapidsai/cudf";
     license = lib.licenses.asl20;
-    platforms = ["x86_64-linux" "aarch64-linux"];
-    maintainers = [];
+    platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
+    maintainers = [ ];
   };
 }

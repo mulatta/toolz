@@ -39,6 +39,6 @@ buildPythonPackage rec {
     homepage = "https://github.com/rapidsai";
     license = lib.licenses.asl20;
     platforms = lib.platforms.all;
-    maintainers = [];
+    maintainers = [ ];
   };
 }

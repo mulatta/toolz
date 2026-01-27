@@ -21,9 +21,10 @@ buildPythonPackage rec {
     python = "py3";
     abi = "none";
     platform =
-      if stdenv.hostPlatform.isAarch64
-      then "manylinux_2_26_aarch64.manylinux_2_28_aarch64"
-      else "manylinux_2_27_x86_64.manylinux_2_28_x86_64";
+      if stdenv.hostPlatform.isAarch64 then
+        "manylinux_2_26_aarch64.manylinux_2_28_aarch64"
+      else
+        "manylinux_2_27_x86_64.manylinux_2_28_x86_64";
     hash = "sha256-Z5e+tKDWh0ZYlE3cOKEkUFnNMKxjBPHh8rfYwj233Rg=";
   };
 
@@ -47,7 +48,10 @@ buildPythonPackage rec {
     description = "Logging framework for RAPIDS built around spdlog";
     homepage = "https://github.com/rapidsai/rapids-logger";
     license = lib.licenses.asl20;
-    platforms = ["x86_64-linux" "aarch64-linux"];
-    maintainers = [];
+    platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
+    maintainers = [ ];
   };
 }

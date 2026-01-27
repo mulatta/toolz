@@ -13,7 +13,7 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-aFym9/7doHQ02O4DxTb0djOFZxxFCcW7SL6zBV/SNqw=";
   };
 
-  buildInputs = [zlib];
+  buildInputs = [ zlib ];
 
   makeFlags = [
     "CC=${stdenv.cc.targetPrefix}cc"

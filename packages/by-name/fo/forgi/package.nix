@@ -45,12 +45,12 @@ buildPythonPackage rec {
     scikit-learn
   ];
 
-  pythonImportsCheck = ["forgi"];
+  pythonImportsCheck = [ "forgi" ];
 
   meta = with lib; {
     description = "RNA Graph Library";
     homepage = "http://www.tbi.univie.ac.at/~pkerp/forgi/";
     license = licenses.gpl3Only;
-    maintainers = [];
+    maintainers = [ ];
   };
 }

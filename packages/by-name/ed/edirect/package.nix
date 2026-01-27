@@ -32,38 +32,41 @@ stdenv.mkDerivation {
 
   sourceRoot = "edirect";
 
-  postUnpack = let
-    platform =
-      if stdenv.isLinux
-      then "Linux"
-      else if stdenv.isDarwin && stdenv.isx86_64
-      then "Darwin"
-      else if stdenv.isDarwin && stdenv.isAarch64
-      then "Silicon"
-      else throw "Unsupported platform";
+  postUnpack =
+    let
+      platform =
+        if stdenv.isLinux then
+          "Linux"
+        else if stdenv.isDarwin && stdenv.isx86_64 then
+          "Darwin"
+        else if stdenv.isDarwin && stdenv.isAarch64 then
+          "Silicon"
+        else
+          throw "Unsupported platform";
 
-    xtractBin = fetchurl {
-      url = "https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/xtract.${platform}.gz";
-      sha256 = "sha256-L8xHH5ciUCJkKlRE7EKG46paLA0xaBpslfpOT6FI7FI=";
-    };
+      xtractBin = fetchurl {
+        url = "https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/xtract.${platform}.gz";
+        sha256 = "sha256-L8xHH5ciUCJkKlRE7EKG46paLA0xaBpslfpOT6FI7FI=";
+      };
 
-    rchiveBin = fetchurl {
-      url = "https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/rchive.${platform}.gz";
-      sha256 = "sha256-D4+pnM1r5shmf/wgaoX8Rbk4K2xBVrMj/UHnPGqTjFk=";
-    };
+      rchiveBin = fetchurl {
+        url = "https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/rchive.${platform}.gz";
+        sha256 = "sha256-D4+pnM1r5shmf/wgaoX8Rbk4K2xBVrMj/UHnPGqTjFk=";
+      };
 
-    transmuteBin = fetchurl {
-      url = "https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/transmute.${platform}.gz";
-      sha256 = "sha256-bgbxyJ8GzEG/IgBu1HPeYSlSlYB7Ci5Uz5NAhEUsm1c=";
-    };
-  in ''
+      transmuteBin = fetchurl {
+        url = "https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/transmute.${platform}.gz";
+        sha256 = "sha256-bgbxyJ8GzEG/IgBu1HPeYSlSlYB7Ci5Uz5NAhEUsm1c=";
+      };
+    in
+    ''
 
-    ${gzip}/bin/gunzip -c ${xtractBin} > edirect/xtract
-    ${gzip}/bin/gunzip -c ${rchiveBin} > edirect/rchive
-    ${gzip}/bin/gunzip -c ${transmuteBin} > edirect/transmute
+      ${gzip}/bin/gunzip -c ${xtractBin} > edirect/xtract
+      ${gzip}/bin/gunzip -c ${rchiveBin} > edirect/rchive
+      ${gzip}/bin/gunzip -c ${transmuteBin} > edirect/transmute
 
-    chmod +x edirect/xtract edirect/rchive edirect/transmute
-  '';
+      chmod +x edirect/xtract edirect/rchive edirect/transmute
+    '';
 
   installPhase = ''
     runHook preInstall
@@ -80,7 +83,13 @@ stdenv.mkDerivation {
     for script in esearch efetch elink efilter einfo epost esummary nquire; do
       if [ -f "$out/share/edirect/$script" ]; then
         makeWrapper "$out/share/edirect/$script" "$out/bin/$script" \
-          --prefix PATH : "${lib.makeBinPath [curl wget which]}" \
+          --prefix PATH : "${
+            lib.makeBinPath [
+              curl
+              wget
+              which
+            ]
+          }" \
           --prefix PERL5LIB : "$out/share/edirect" \
           --set EDIRECT_PUBMED_MASTER "$out/share/edirect"
       fi

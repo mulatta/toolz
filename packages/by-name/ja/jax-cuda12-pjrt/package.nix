@@ -21,18 +21,18 @@ buildPythonPackage rec {
     hash = "sha256-DHzJj5Ysx/yOCl6mMxtCoM7lFvIC8cMBn2qlzZUwzKA=";
   };
 
-  nativeBuildInputs = lib.optionals stdenv.hostPlatform.isLinux [autoPatchelfHook];
-  buildInputs = [(lib.getLib stdenv.cc.cc)];
+  nativeBuildInputs = lib.optionals stdenv.hostPlatform.isLinux [ autoPatchelfHook ];
+  buildInputs = [ (lib.getLib stdenv.cc.cc) ];
 
-  dependencies = [jax];
+  dependencies = [ jax ];
 
-  pythonImportsCheck = ["jax_plugins.xla_cuda12"];
+  pythonImportsCheck = [ "jax_plugins.xla_cuda12" ];
 
   meta = {
     description = "JAX XLA PJRT Plugin for CUDA 12";
     homepage = "https://github.com/google/jax";
     license = lib.licenses.asl20;
-    platforms = ["x86_64-linux"];
-    maintainers = [];
+    platforms = [ "x86_64-linux" ];
+    maintainers = [ ];
   };
 }

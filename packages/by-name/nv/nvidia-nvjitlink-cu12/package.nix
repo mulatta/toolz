@@ -20,8 +20,8 @@ buildPythonPackage rec {
     hash = "sha256-muNG0WIDrk6lE75BZJUWegEB0z0tFJNaqcGCmj+0UUI=";
   };
 
-  nativeBuildInputs = lib.optionals stdenv.hostPlatform.isLinux [autoPatchelfHook];
-  buildInputs = [(lib.getLib stdenv.cc.cc)];
+  nativeBuildInputs = lib.optionals stdenv.hostPlatform.isLinux [ autoPatchelfHook ];
+  buildInputs = [ (lib.getLib stdenv.cc.cc) ];
 
   # Remove namespace __init__.py to prevent collisions (PEP 420 implicit namespace)
   postInstall = ''
@@ -29,13 +29,13 @@ buildPythonPackage rec {
     rm -rf $out/lib/python*/site-packages/nvidia/__pycache__
   '';
 
-  pythonImportsCheck = ["nvidia.nvjitlink"];
+  pythonImportsCheck = [ "nvidia.nvjitlink" ];
 
   meta = {
     description = "NVIDIA JIT LTO Library";
     homepage = "https://developer.nvidia.com/cuda-toolkit";
     license = lib.licenses.unfree;
-    platforms = ["x86_64-linux"];
-    maintainers = [];
+    platforms = [ "x86_64-linux" ];
+    maintainers = [ ];
   };
 }

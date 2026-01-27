@@ -1,5 +1,6 @@
-{inputs, ...}: {
-  imports = [inputs.treefmt-nix.flakeModule];
+{ inputs, ... }:
+{
+  imports = [ inputs.treefmt-nix.flakeModule ];
   perSystem = {
     treefmt = {
       projectRootFile = ".git/config";

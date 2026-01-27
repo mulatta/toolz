@@ -20,7 +20,7 @@ buildPythonPackage rec {
     hash = "sha256-YNBf5V5/taHkdA/FdfrK0g3G7jp0jo09NrpEFC51zgM=";
   };
 
-  build-system = [hatchling];
+  build-system = [ hatchling ];
 
   dependencies = [
     markdown
@@ -28,12 +28,12 @@ buildPythonPackage rec {
     pygments
   ];
 
-  pythonImportsCheck = ["pymdownx"];
+  pythonImportsCheck = [ "pymdownx" ];
 
   meta = with lib; {
     description = "Extension pack for Python Markdown";
     homepage = "https://github.com/facelessuser/pymdown-extensions";
     license = licenses.mit;
-    maintainers = [];
+    maintainers = [ ];
   };
 }

@@ -17,9 +17,9 @@ stdenv.mkDerivation rec {
     hash = "sha256-9E0+0EPPRhiUs9ULnzugPwu+APrqpDUizdJM97AWFqw=";
   };
 
-  nativeBuildInputs = [makeWrapper];
+  nativeBuildInputs = [ makeWrapper ];
 
-  buildInputs = [perl];
+  buildInputs = [ perl ];
 
   propagatedBuildInputs = with perlPackages; [
     TextLevenshteinXS
@@ -36,7 +36,7 @@ stdenv.mkDerivation rec {
       if [ -f "$script" ] && [ -x "$script" ]; then
         cp "$script" $out/bin/
         wrapProgram $out/bin/$script \
-          --prefix PERL5LIB : "${with perlPackages; makePerlPath []}"
+          --prefix PERL5LIB : "${with perlPackages; makePerlPath [ ]}"
       fi
     done
 
@@ -67,7 +67,7 @@ stdenv.mkDerivation rec {
     '';
     homepage = "https://github.com/FASTAptamer/FASTAptamer";
     license = licenses.gpl3Only;
-    maintainers = [];
+    maintainers = [ ];
     platforms = platforms.unix;
     mainProgram = "fastaptamer_count";
   };

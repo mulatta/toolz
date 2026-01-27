@@ -16,7 +16,7 @@ stdenv.mkDerivation rec {
 
   sourceRoot = "bbmap";
 
-  nativeBuildInputs = [makeWrapper];
+  nativeBuildInputs = [ makeWrapper ];
 
   dontBuild = true;
 
@@ -33,7 +33,7 @@ stdenv.mkDerivation rec {
         name=$(basename "$script")
         makeWrapper "$script" "$out/bin/$name" \
           --set JAVA_HOME "${jre}" \
-          --prefix PATH : "${lib.makeBinPath [jre]}"
+          --prefix PATH : "${lib.makeBinPath [ jre ]}"
       fi
     done
 

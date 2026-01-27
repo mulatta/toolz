@@ -23,7 +23,7 @@ buildPythonPackage rec {
     hash = "sha256-bPKPF/ZBB6DE14Ar5f9VN7ITC/wRLyXVow3yJwWMoOY=";
   };
 
-  nativeBuildInputs = lib.optionals stdenv.hostPlatform.isLinux [autoPatchelfHook];
+  nativeBuildInputs = lib.optionals stdenv.hostPlatform.isLinux [ autoPatchelfHook ];
   buildInputs = [
     (lib.getLib stdenv.cc.cc)
     nvidia-cublas-cu12
@@ -50,13 +50,13 @@ buildPythonPackage rec {
     addAutoPatchelfSearchPath "${nvidia-nvjitlink-cu12}/${nvidia-nvjitlink-cu12.pythonModule.sitePackages}/nvidia/nvjitlink/lib"
   '';
 
-  pythonImportsCheck = ["nvidia.cusolver"];
+  pythonImportsCheck = [ "nvidia.cusolver" ];
 
   meta = {
     description = "CUSOLVER native runtime libraries";
     homepage = "https://developer.nvidia.com/cusolver";
     license = lib.licenses.unfree;
-    platforms = ["x86_64-linux"];
-    maintainers = [];
+    platforms = [ "x86_64-linux" ];
+    maintainers = [ ];
   };
 }

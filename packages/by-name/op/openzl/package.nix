@@ -50,7 +50,7 @@ stdenv.mkDerivation (finalAttrs: {
     "-DZSTD_INCLUDE_DIR=${zstd}/include"
   ];
 
-  makeFlags = ["zli"];
+  makeFlags = [ "zli" ];
 
   enableParallelBuilding = true;
 
@@ -75,7 +75,7 @@ stdenv.mkDerivation (finalAttrs: {
     homepage = "https://openzl.org";
     changelog = "https://github.com/facebook/openzl/releases";
     license = licenses.bsd3;
-    maintainers = [];
+    maintainers = [ ];
     platforms = platforms.unix;
     mainProgram = "zli";
   };

@@ -40,6 +40,6 @@ buildPythonPackage rec {
     homepage = "https://pypi.org/project/cuda-core/";
     license = lib.licenses.asl20;
     platforms = lib.platforms.linux;
-    maintainers = [];
+    maintainers = [ ];
   };
 }

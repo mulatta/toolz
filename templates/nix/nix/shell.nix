@@ -1,9 +1,11 @@
 {
-  perSystem = {pkgs, ...}: {
-    devShells.default = pkgs.mkShell {
-      packages = with pkgs; [
-        git
-      ];
+  perSystem =
+    { pkgs, ... }:
+    {
+      devShells.default = pkgs.mkShell {
+        packages = with pkgs; [
+          git
+        ];
+      };
     };
-  };
 }

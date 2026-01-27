@@ -34,7 +34,7 @@ stdenv.mkDerivation rec {
     "--with-dll"
   ];
 
-  makeFlags = ["all_projects=app/"];
+  makeFlags = [ "all_projects=app/" ];
 
   preConfigure = ''
     export NCBICXX_RECONF_POLICY=warn
@@ -83,7 +83,7 @@ stdenv.mkDerivation rec {
         --replace-fail "/bin/date" "${coreutils}/bin/date"
   '';
 
-  depsBuildBuild = [buildPackages.stdenv.cc];
+  depsBuildBuild = [ buildPackages.stdenv.cc ];
 
   nativeBuildInputs = [
     cpio
@@ -106,7 +106,7 @@ stdenv.mkDerivation rec {
 
   strictDeps = true;
 
-  hardeningDisable = ["format"];
+  hardeningDisable = [ "format" ];
 
   postInstall = ''
     substituteInPlace $out/bin/get_species_taxids.sh \
@@ -119,31 +119,31 @@ stdenv.mkDerivation rec {
                   'foreach (qw(${curl}/bin ${wget}/bin /usr/local/bin /usr/bin))' \
         --replace-fail 'local $ENV{PATH} = "/bin:/usr/bin";' \
                   'local $ENV{PATH} = "${
-      lib.makeBinPath [
-        gnutar
-        gzip
-        coreutils
-      ]
-    }:$ENV{PATH}";'
+                    lib.makeBinPath [
+                      gnutar
+                      gzip
+                      coreutils
+                    ]
+                  }:$ENV{PATH}";'
 
       wrapProgram $out/bin/update_blastdb.pl \
         --prefix PATH : ${
-      lib.makeBinPath [
-        curl
-        wget
-        findutils
-        gnutar
-        gzip
-        coreutils
-        google-cloud-sdk
-      ]
-    }
+          lib.makeBinPath [
+            curl
+            wget
+            findutils
+            gnutar
+            gzip
+            coreutils
+            google-cloud-sdk
+          ]
+        }
 
       chmod +x $out/bin/update_blastdb.pl
     fi
   '';
 
-  patches = [./no_slash_bin.patch];
+  patches = [ ./no_slash_bin.patch ];
 
   enableParallelBuilding = true;
 
@@ -154,6 +154,6 @@ stdenv.mkDerivation rec {
     homepage = "https://blast.ncbi.nlm.nih.gov/Blast.cgi";
     license = licenses.publicDomain;
     platforms = platforms.linux;
-    maintainers = with maintainers; [luispedro];
+    maintainers = with maintainers; [ luispedro ];
   };
 }

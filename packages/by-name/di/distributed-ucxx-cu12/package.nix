@@ -34,13 +34,16 @@ buildPythonPackage rec {
   # Skip tests - requires distributed cluster
   doCheck = false;
 
-  pythonImportsCheck = ["distributed_ucxx"];
+  pythonImportsCheck = [ "distributed_ucxx" ];
 
   meta = {
     description = "Distributed UCXX communication backend for Dask";
     homepage = "https://github.com/rapidsai/ucxx";
     license = lib.licenses.bsd3;
-    platforms = ["x86_64-linux" "aarch64-linux"];
-    maintainers = [];
+    platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
+    maintainers = [ ];
   };
 }

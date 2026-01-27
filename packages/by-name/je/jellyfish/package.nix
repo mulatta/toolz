@@ -43,7 +43,10 @@ stdenv.mkDerivation rec {
     '';
     homepage = "https://github.com/gmarcais/Jellyfish";
     changelog = "https://github.com/gmarcais/Jellyfish/releases/tag/v${version}";
-    license = with licenses; [bsd3 gpl3Only];
+    license = with licenses; [
+      bsd3
+      gpl3Only
+    ];
     platforms = platforms.unix;
     mainProgram = "jellyfish";
   };

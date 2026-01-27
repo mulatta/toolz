@@ -46,7 +46,10 @@ buildPythonPackage rec {
     description = "Dask integration for cuDF GPU DataFrames";
     homepage = "https://github.com/rapidsai/cudf";
     license = lib.licenses.asl20;
-    platforms = ["x86_64-linux" "aarch64-linux"];
-    maintainers = [];
+    platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
+    maintainers = [ ];
   };
 }

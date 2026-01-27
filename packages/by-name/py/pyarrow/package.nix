@@ -52,7 +52,7 @@ buildPythonPackage rec {
     description = "Python library for Apache Arrow with ORC support (from PyPI wheel)";
     homepage = "https://arrow.apache.org/";
     license = lib.licenses.asl20;
-    platforms = ["x86_64-linux"];
-    maintainers = [];
+    platforms = [ "x86_64-linux" ];
+    maintainers = [ ];
   };
 }

@@ -1,4 +1,5 @@
-name: let
+name:
+let
   firstTwo = builtins.substring 0 2 name;
 in
-  ../by-name + "/${firstTwo}/${name}/package.nix"
+../by-name + "/${firstTwo}/${name}/package.nix"

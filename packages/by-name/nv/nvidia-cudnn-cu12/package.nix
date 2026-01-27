@@ -22,13 +22,13 @@ buildPythonPackage rec {
     hash = "sha256-MKw4afbbF9Fw4OVW3WzF7uAmR6vDHKhWY01aQPgsFbI=";
   };
 
-  nativeBuildInputs = lib.optionals stdenv.hostPlatform.isLinux [autoPatchelfHook];
+  nativeBuildInputs = lib.optionals stdenv.hostPlatform.isLinux [ autoPatchelfHook ];
   buildInputs = [
     (lib.getLib stdenv.cc.cc)
     zlib
   ];
 
-  dependencies = [nvidia-cublas-cu12];
+  dependencies = [ nvidia-cublas-cu12 ];
 
   # Remove namespace __init__.py to prevent collisions (PEP 420 implicit namespace)
   postInstall = ''
@@ -36,13 +36,13 @@ buildPythonPackage rec {
     rm -rf $out/lib/python*/site-packages/nvidia/__pycache__
   '';
 
-  pythonImportsCheck = ["nvidia.cudnn"];
+  pythonImportsCheck = [ "nvidia.cudnn" ];
 
   meta = {
     description = "NVIDIA cuDNN deep learning library";
     homepage = "https://developer.nvidia.com/cudnn";
     license = lib.licenses.unfree;
-    platforms = ["x86_64-linux"];
-    maintainers = [];
+    platforms = [ "x86_64-linux" ];
+    maintainers = [ ];
   };
 }

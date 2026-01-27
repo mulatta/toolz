@@ -19,22 +19,20 @@ stdenv.mkDerivation rec {
     fetchSubmodules = true;
   };
 
-  nativeBuildInputs =
-    [
-      git
-    ]
-    ++ lib.optionals withPython [
-      python3
-      python3.pkgs.pybind11
-    ];
+  nativeBuildInputs = [
+    git
+  ]
+  ++ lib.optionals withPython [
+    python3
+    python3.pkgs.pybind11
+  ];
 
-  buildInputs =
-    [
-      zlib
-    ]
-    ++ lib.optionals withPython [
-      python3
-    ];
+  buildInputs = [
+    zlib
+  ]
+  ++ lib.optionals withPython [
+    python3
+  ];
 
   dontConfigure = true;
   enableParallelBuilding = true;
@@ -67,9 +65,12 @@ stdenv.mkDerivation rec {
     export PATH="${python3}/bin:$PATH"
   '';
 
-  buildFlags =
-    ["kmc" "kmc_dump" "kmc_tools"]
-    ++ lib.optionals withPython ["py_kmc_api"];
+  buildFlags = [
+    "kmc"
+    "kmc_dump"
+    "kmc_tools"
+  ]
+  ++ lib.optionals withPython [ "py_kmc_api" ];
 
   installPhase = ''
     runHook preInstall
@@ -123,7 +124,7 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/refresh-bio/KMC";
     changelog = "https://github.com/refresh-bio/KMC/releases/tag/v${version}";
     license = licenses.gpl3Only;
-    maintainers = [];
+    maintainers = [ ];
     platforms = platforms.unix;
     mainProgram = "kmc";
   };

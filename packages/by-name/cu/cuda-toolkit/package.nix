@@ -48,6 +48,6 @@ buildPythonPackage rec {
     homepage = "https://pypi.org/project/cuda-toolkit/";
     license = lib.licenses.unfree;
     platforms = lib.platforms.linux;
-    maintainers = [];
+    maintainers = [ ];
   };
 }

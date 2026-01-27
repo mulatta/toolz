@@ -47,7 +47,10 @@ buildPythonPackage rec {
     description = "Low-level CUDA C API interfaces for Python";
     homepage = "https://pypi.org/project/cuda-bindings/";
     license = lib.licenses.asl20;
-    platforms = ["x86_64-linux" "aarch64-linux"];
-    maintainers = [];
+    platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
+    maintainers = [ ];
   };
 }
