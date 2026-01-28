@@ -20,8 +20,8 @@ buildPythonPackage rec {
     hash = "sha256-doFgrIn297RZvudH6NF12/U2Gc/nSypWNiZBYxOAE8o=";
   };
 
-  nativeBuildInputs = lib.optionals stdenv.hostPlatform.isLinux [autoPatchelfHook];
-  buildInputs = [(lib.getLib stdenv.cc.cc)];
+  nativeBuildInputs = lib.optionals stdenv.hostPlatform.isLinux [ autoPatchelfHook ];
+  buildInputs = [ (lib.getLib stdenv.cc.cc) ];
 
   # Remove namespace __init__.py to prevent collisions (PEP 420 implicit namespace)
   postInstall = ''
@@ -29,13 +29,13 @@ buildPythonPackage rec {
     rm -rf $out/lib/python*/site-packages/nvidia/__pycache__
   '';
 
-  pythonImportsCheck = ["nvidia.cufft"];
+  pythonImportsCheck = [ "nvidia.cufft" ];
 
   meta = {
     description = "CUFFT native runtime libraries";
     homepage = "https://developer.nvidia.com/cufft";
     license = lib.licenses.unfree;
-    platforms = ["x86_64-linux"];
-    maintainers = [];
+    platforms = [ "x86_64-linux" ];
+    maintainers = [ ];
   };
 }

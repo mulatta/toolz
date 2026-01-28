@@ -25,7 +25,7 @@ buildPythonPackage rec {
     tomli
   ];
 
-  pythonImportsCheck = ["rapids_build_backend"];
+  pythonImportsCheck = [ "rapids_build_backend" ];
 
   # Tests require git repository
   doCheck = false;
@@ -34,6 +34,6 @@ buildPythonPackage rec {
     description = "Build backend for RAPIDS projects";
     homepage = "https://github.com/rapidsai/rapids-build-backend";
     license = lib.licenses.asl20;
-    maintainers = [];
+    maintainers = [ ];
   };
 }

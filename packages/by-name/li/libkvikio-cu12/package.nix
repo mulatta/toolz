@@ -19,9 +19,7 @@ buildPythonPackage rec {
     python = "py3";
     abi = "none";
     platform =
-      if stdenv.hostPlatform.isAarch64
-      then "manylinux_2_28_aarch64"
-      else "manylinux_2_28_x86_64";
+      if stdenv.hostPlatform.isAarch64 then "manylinux_2_28_aarch64" else "manylinux_2_28_x86_64";
     hash = "sha256-XKn9xuh/JhbBTPV02DjZrDUh8MdoVGnxkR9kXdeLG6g=";
   };
 
@@ -39,13 +37,16 @@ buildPythonPackage rec {
   # Skip tests - binary wheel with CUDA dependencies
   doCheck = false;
 
-  pythonImportsCheck = ["libkvikio"];
+  pythonImportsCheck = [ "libkvikio" ];
 
   meta = {
     description = "High performance file IO library with GPUDirect Storage (GDS) support";
     homepage = "https://github.com/rapidsai/kvikio";
     license = lib.licenses.asl20;
-    platforms = ["x86_64-linux" "aarch64-linux"];
-    maintainers = [];
+    platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
+    maintainers = [ ];
   };
 }

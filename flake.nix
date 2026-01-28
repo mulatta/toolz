@@ -1,11 +1,12 @@
 {
   description = "toolz";
   nixConfig = {
-    extra-substituters = ["https://cache.sjanglab.org/toolz"];
-    extra-trusted-public-keys = ["toolz:TOX1KA7jJYaosx/t7tch0x5GaUws3I4dPW4TgwFjHKk="];
+    extra-substituters = [ "https://cache.sjanglab.org/toolz" ];
+    extra-trusted-public-keys = [ "toolz:TOX1KA7jJYaosx/t7tch0x5GaUws3I4dPW4TgwFjHKk=" ];
   };
-  outputs = inputs @ {flake-parts, ...}:
-    flake-parts.lib.mkFlake {inherit inputs;} {
+  outputs =
+    inputs@{ flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
       systems = import inputs.systems;
       imports = [
         ./packages/flake-module.nix
@@ -16,23 +17,26 @@
         ./website/flake-module.nix
       ];
 
-      perSystem = {
-        lib,
-        self',
-        system,
-        ...
-      }: {
-        _module.args.pkgs = import inputs.nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        };
+      perSystem =
+        {
+          lib,
+          self',
+          system,
+          ...
+        }:
+        {
+          _module.args.pkgs = import inputs.nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
 
-        checks = let
-          packages = lib.mapAttrs' (n: lib.nameValuePair "package-${n}") self'.packages;
-          devShells = lib.mapAttrs' (n: lib.nameValuePair "devShell-${n}") self'.devShells;
-        in
-          {inherit (self') formatter;} // packages // devShells;
-      };
+          checks =
+            let
+              packages = lib.mapAttrs' (n: lib.nameValuePair "package-${n}") self'.packages;
+              devShells = lib.mapAttrs' (n: lib.nameValuePair "devShell-${n}") self'.devShells;
+            in
+            { inherit (self') formatter; } // packages // devShells;
+        };
     };
 
   inputs = {

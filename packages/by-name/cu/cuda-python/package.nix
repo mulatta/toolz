@@ -36,6 +36,6 @@ buildPythonPackage rec {
     homepage = "https://nvidia.github.io/cuda-python/";
     license = lib.licenses.asl20;
     platforms = lib.platforms.linux;
-    maintainers = [];
+    maintainers = [ ];
   };
 }

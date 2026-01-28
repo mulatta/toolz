@@ -62,13 +62,16 @@ buildPythonPackage rec {
   # Skip tests - requires CUDA runtime and Dask cluster
   doCheck = false;
 
-  pythonImportsCheck = ["raft_dask"];
+  pythonImportsCheck = [ "raft_dask" ];
 
   meta = {
     description = "Distributed RAFT algorithms for Dask";
     homepage = "https://github.com/rapidsai/raft";
     license = lib.licenses.asl20;
-    platforms = ["x86_64-linux" "aarch64-linux"];
-    maintainers = [];
+    platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
+    maintainers = [ ];
   };
 }

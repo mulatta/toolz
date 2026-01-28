@@ -43,7 +43,10 @@ buildPythonPackage rec {
     description = "Python bindings for RAPIDS RAFT library";
     homepage = "https://github.com/rapidsai/raft";
     license = lib.licenses.asl20;
-    platforms = ["x86_64-linux" "aarch64-linux"];
-    maintainers = [];
+    platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
+    maintainers = [ ];
   };
 }

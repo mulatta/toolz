@@ -6,7 +6,8 @@
   setuptools-scm,
   cython,
   xopen,
-}: let
+}:
+let
   cython_latest = cython.overrideAttrs (_old: rec {
     version = "3.1.4";
     src = fetchPypi {
@@ -16,34 +17,34 @@
     };
   });
 in
-  buildPythonPackage rec {
-    pname = "dnaio";
-    version = "1.2.4";
-    pyproject = true;
+buildPythonPackage rec {
+  pname = "dnaio";
+  version = "1.2.4";
+  pyproject = true;
 
-    src = fetchPypi {
-      inherit pname version;
-      hash = "sha256-p1cDEfKeizweo5pg9Xt7r42tjyUIWVxY1CeMVXFGMWY=";
-    };
+  src = fetchPypi {
+    inherit pname version;
+    hash = "sha256-p1cDEfKeizweo5pg9Xt7r42tjyUIWVxY1CeMVXFGMWY=";
+  };
 
-    nativeBuildInputs = [cython_latest];
+  nativeBuildInputs = [ cython_latest ];
 
-    build-system = [
-      setuptools
-      setuptools-scm
-      cython_latest
-    ];
+  build-system = [
+    setuptools
+    setuptools-scm
+    cython_latest
+  ];
 
-    dependencies = [xopen];
+  dependencies = [ xopen ];
 
-    env.SETUPTOOLS_SCM_PRETEND_VERSION = version;
+  env.SETUPTOOLS_SCM_PRETEND_VERSION = version;
 
-    pythonImportsCheck = ["dnaio"];
+  pythonImportsCheck = [ "dnaio" ];
 
-    meta = {
-      description = "Read and write FASTA and FASTQ files efficiently";
-      homepage = "https://github.com/marcelm/dnaio";
-      license = lib.licenses.mit;
-      platforms = lib.platforms.unix;
-    };
-  }
+  meta = {
+    description = "Read and write FASTA and FASTQ files efficiently";
+    homepage = "https://github.com/marcelm/dnaio";
+    license = lib.licenses.mit;
+    platforms = lib.platforms.unix;
+  };
+}

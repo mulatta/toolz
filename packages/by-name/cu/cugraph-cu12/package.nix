@@ -118,7 +118,10 @@ buildPythonPackage rec {
     description = "cuGraph - GPU-accelerated graph analytics (CUDA 12)";
     homepage = "https://github.com/rapidsai/cugraph";
     license = lib.licenses.asl20;
-    platforms = ["x86_64-linux" "aarch64-linux"];
-    maintainers = [];
+    platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
+    maintainers = [ ];
   };
 }

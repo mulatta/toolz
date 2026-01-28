@@ -21,27 +21,25 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-7gMrVyV5SMoPBhCIMJkmdXLJGmNe7L2Irl2JdMJDD80=";
   };
 
-  nativeBuildInputs =
-    [
-      pkg-config
-    ]
-    ++ lib.optionals (withPython || withRuby || withPerl) [
-      swig
-    ];
+  nativeBuildInputs = [
+    pkg-config
+  ]
+  ++ lib.optionals (withPython || withRuby || withPerl) [
+    swig
+  ];
 
-  buildInputs =
-    [
-      htslib
-    ]
-    ++ lib.optionals withPython [
-      python3
-    ]
-    ++ lib.optionals withRuby [
-      ruby
-    ]
-    ++ lib.optionals withPerl [
-      perl
-    ];
+  buildInputs = [
+    htslib
+  ]
+  ++ lib.optionals withPython [
+    python3
+  ]
+  ++ lib.optionals withRuby [
+    ruby
+  ]
+  ++ lib.optionals withPerl [
+    perl
+  ];
 
   enableParallelBuilding = true;
 
@@ -80,8 +78,11 @@ stdenv.mkDerivation rec {
     '';
     homepage = "https://github.com/gmarcais/Jellyfish";
     changelog = "https://github.com/gmarcais/Jellyfish/releases/tag/v${version}";
-    license = with licenses; [bsd3 gpl3Only]; # Dual license
-    maintainers = [];
+    license = with licenses; [
+      bsd3
+      gpl3Only
+    ]; # Dual license
+    maintainers = [ ];
     platforms = platforms.unix;
     mainProgram = "jellyfish";
   };

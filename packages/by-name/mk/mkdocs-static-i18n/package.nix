@@ -39,6 +39,6 @@ buildPythonPackage rec {
     description = "MkDocs i18n plugin using static translation markdown files";
     homepage = "https://github.com/ultrabug/mkdocs-static-i18n";
     license = lib.licenses.mit;
-    maintainers = [];
+    maintainers = [ ];
   };
 }

@@ -20,8 +20,8 @@ buildPythonPackage rec {
     hash = "sha256-8z+2jhAdmUcMgtF/kqDdn3TeKiFoXCF/RxbN1jsTFus=";
   };
 
-  nativeBuildInputs = lib.optionals stdenv.hostPlatform.isLinux [autoPatchelfHook];
-  buildInputs = [(lib.getLib stdenv.cc.cc)];
+  nativeBuildInputs = lib.optionals stdenv.hostPlatform.isLinux [ autoPatchelfHook ];
+  buildInputs = [ (lib.getLib stdenv.cc.cc) ];
 
   # Remove namespace __init__.py to prevent collisions (PEP 420 implicit namespace)
   postInstall = ''
@@ -29,13 +29,13 @@ buildPythonPackage rec {
     rm -rf $out/lib/python*/site-packages/nvidia/__pycache__
   '';
 
-  pythonImportsCheck = ["nvidia.cublas"];
+  pythonImportsCheck = [ "nvidia.cublas" ];
 
   meta = {
     description = "CUBLAS native runtime libraries";
     homepage = "https://developer.nvidia.com/cublas";
     license = lib.licenses.unfree;
-    platforms = ["x86_64-linux"];
-    maintainers = [];
+    platforms = [ "x86_64-linux" ];
+    maintainers = [ ];
   };
 }

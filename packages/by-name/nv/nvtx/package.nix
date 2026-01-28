@@ -31,12 +31,12 @@ buildPythonPackage rec {
     done
   '';
 
-  pythonImportsCheck = ["nvtx"];
+  pythonImportsCheck = [ "nvtx" ];
 
   meta = {
     description = "Python code annotation library for NVIDIA Nsight Systems profiling";
     homepage = "https://github.com/NVIDIA/NVTX";
     license = lib.licenses.asl20;
-    maintainers = [];
+    maintainers = [ ];
   };
 }

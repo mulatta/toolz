@@ -43,7 +43,11 @@ stdenv.mkDerivation rec {
   NIX_LDFLAGS = "-L${zlib}/lib";
   NIX_CFLAGS_COMPILE = "-I${zlib}/include";
 
-  buildFlags = ["kmc" "kmc_dump" "kmc_tools"];
+  buildFlags = [
+    "kmc"
+    "kmc_dump"
+    "kmc_tools"
+  ];
 
   installPhase = ''
     runHook preInstall
@@ -82,7 +86,7 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/refresh-bio/KMC";
     changelog = "https://github.com/refresh-bio/KMC/releases/tag/v${version}";
     license = licenses.gpl3Only;
-    maintainers = [];
+    maintainers = [ ];
     platforms = platforms.unix;
     mainProgram = "kmc";
   };

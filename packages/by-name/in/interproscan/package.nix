@@ -11,7 +11,8 @@
   bzip2,
   gfortran,
   pcre2,
-}: let
+}:
+let
   version = "5.76-107.0";
 
   interproscan-unwrapped = stdenv.mkDerivation {
@@ -53,7 +54,7 @@
 
     meta = {
       description = "InterProScan - unwrapped distribution";
-      platforms = ["x86_64-linux"];
+      platforms = [ "x86_64-linux" ];
     };
   };
 
@@ -79,74 +80,74 @@
       "$@"
   '';
 in
-  buildFHSEnv {
-    name = "interproscan";
-    inherit (interproscan-unwrapped) version;
+buildFHSEnv {
+  name = "interproscan";
+  inherit (interproscan-unwrapped) version;
 
-    targetPkgs = pkgs:
-      with pkgs; [
-        # Core runtime
-        bash
-        coreutils
-        gnugrep
-        gnused
-        gawk
-        findutils
-        gzip
-        gnutar
+  targetPkgs =
+    pkgs: with pkgs; [
+      # Core runtime
+      bash
+      coreutils
+      gnugrep
+      gnused
+      gawk
+      findutils
+      gzip
+      gnutar
 
-        # InterProScan requirements
-        jdk11
-        perl
-        python3
+      # InterProScan requirements
+      jdk11
+      perl
+      python3
 
-        # Libraries needed by bundled binaries
-        stdenv.cc.cc.lib
-        zlib
-        bzip2
-        pcre2
-        gfortran.cc.lib
+      # Libraries needed by bundled binaries
+      stdenv.cc.cc.lib
+      zlib
+      bzip2
+      pcre2
+      gfortran.cc.lib
 
-        # Additional libraries that might be needed
-        libgcc
-        glibc
-      ];
+      # Additional libraries that might be needed
+      libgcc
+      glibc
+    ];
 
-    inherit runScript;
+  inherit runScript;
 
-    extraInstallCommands = ''
-      # Create setup script for HMM indexing (run once after installation)
-      mkdir -p $out/bin
-      cat > $out/bin/interproscan-setup <<EOF
-      #!/usr/bin/env bash
-      echo "Indexing HMM models for InterProScan..."
-      echo "This may take several minutes on first run."
-      exec "$out/bin/interproscan" -c "
-        cd ${interproscan-unwrapped}/share/interproscan
-        export PATH=${interproscan-unwrapped}/share/interproscan/bin/hmmer/hmmer3/3.3:\\\$PATH
-        python3 setup.py -f interproscan.properties
-      "
-      EOF
-      chmod +x $out/bin/interproscan-setup
+  extraInstallCommands = ''
+    # Create setup script for HMM indexing (run once after installation)
+    mkdir -p $out/bin
+    cat > $out/bin/interproscan-setup <<EOF
+    #!/usr/bin/env bash
+    echo "Indexing HMM models for InterProScan..."
+    echo "This may take several minutes on first run."
+    exec "$out/bin/interproscan" -c "
+      cd ${interproscan-unwrapped}/share/interproscan
+      export PATH=${interproscan-unwrapped}/share/interproscan/bin/hmmer/hmmer3/3.3:\\\$PATH
+      python3 setup.py -f interproscan.properties
+    "
+    EOF
+    chmod +x $out/bin/interproscan-setup
+  '';
+
+  meta = with lib; {
+    description = "Protein sequence analysis and classification";
+    longDescription = ''
+      InterProScan is a comprehensive tool that combines different protein
+      signature recognition methods into one resource.
+
+      This package uses buildFHSEnv to provide a standard Linux environment
+      for the bundled pre-compiled binaries and scripts that assume FHS paths.
+
+      Note: HMM models need to be indexed on first use. Run:
+        interproscan-setup
+      Or the indexing will happen automatically on first interproscan run.
     '';
-
-    meta = with lib; {
-      description = "Protein sequence analysis and classification";
-      longDescription = ''
-        InterProScan is a comprehensive tool that combines different protein
-        signature recognition methods into one resource.
-
-        This package uses buildFHSEnv to provide a standard Linux environment
-        for the bundled pre-compiled binaries and scripts that assume FHS paths.
-
-        Note: HMM models need to be indexed on first use. Run:
-          interproscan-setup
-        Or the indexing will happen automatically on first interproscan run.
-      '';
-      homepage = "https://www.ebi.ac.uk/interpro/";
-      license = licenses.asl20;
-      mainProgram = "interproscan";
-      platforms = ["x86_64-linux"];
-      sourceProvenance = with sourceTypes; [binaryNativeCode];
-    };
-  }
+    homepage = "https://www.ebi.ac.uk/interpro/";
+    license = licenses.asl20;
+    mainProgram = "interproscan";
+    platforms = [ "x86_64-linux" ];
+    sourceProvenance = with sourceTypes; [ binaryNativeCode ];
+  };
+}

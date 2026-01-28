@@ -1,5 +1,8 @@
-{self, ...}: {
-  perSystem = {pkgs, ...}: {
-    packages = import (self + "/default.nix") {inherit pkgs;};
-  };
+{ self, ... }:
+{
+  perSystem =
+    { pkgs, ... }:
+    {
+      packages = import (self + "/default.nix") { inherit pkgs; };
+    };
 }

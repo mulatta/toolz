@@ -25,13 +25,13 @@ buildPythonPackage rec {
   # Skip tests - requires CUDA toolkit
   doCheck = false;
 
-  pythonImportsCheck = ["cuda.pathfinder"];
+  pythonImportsCheck = [ "cuda.pathfinder" ];
 
   meta = {
     description = "Pathfinder for CUDA components";
     homepage = "https://pypi.org/project/cuda-pathfinder/";
     license = lib.licenses.asl20;
     platforms = lib.platforms.linux;
-    maintainers = [];
+    maintainers = [ ];
   };
 }

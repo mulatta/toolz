@@ -23,9 +23,10 @@ buildPythonPackage rec {
     python = "py3";
     abi = "none";
     platform =
-      if stdenv.hostPlatform.isAarch64
-      then "manylinux_2_24_aarch64.manylinux_2_28_aarch64"
-      else "manylinux_2_24_x86_64.manylinux_2_28_x86_64";
+      if stdenv.hostPlatform.isAarch64 then
+        "manylinux_2_24_aarch64.manylinux_2_28_aarch64"
+      else
+        "manylinux_2_24_x86_64.manylinux_2_28_x86_64";
     hash = "sha256-2/l1lUGZo/pkHaI/vtN439ucMMZAHsb495FLxcCviik=";
   };
 
@@ -54,13 +55,16 @@ buildPythonPackage rec {
   # Skip tests - binary wheel
   doCheck = false;
 
-  pythonImportsCheck = ["libucxx"];
+  pythonImportsCheck = [ "libucxx" ];
 
   meta = {
     description = "UCXX unified communication framework library for CUDA 12";
     homepage = "https://github.com/rapidsai/ucxx";
     license = lib.licenses.bsd3;
-    platforms = ["x86_64-linux" "aarch64-linux"];
-    maintainers = [];
+    platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
+    maintainers = [ ];
   };
 }

@@ -39,7 +39,7 @@ buildPythonPackage rec {
   # Force release version (not dev version)
   env.JAX_RELEASE = "1";
 
-  pythonImportsCheck = ["jax"];
+  pythonImportsCheck = [ "jax" ];
 
   # Tests require GPU/TPU
   doCheck = false;

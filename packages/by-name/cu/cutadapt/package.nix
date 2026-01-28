@@ -27,18 +27,17 @@ buildPythonPackage rec {
     cython
   ];
 
-  propagatedBuildInputs =
-    [
-      xopen
-      dnaio
-    ]
-    ++ lib.optionals stdenv.isLinux [
-      isal
-    ];
+  propagatedBuildInputs = [
+    xopen
+    dnaio
+  ]
+  ++ lib.optionals stdenv.isLinux [
+    isal
+  ];
 
   SETUPTOOLS_SCM_PRETEND_VERSION = version;
 
-  pythonImportsCheck = ["cutadapt"];
+  pythonImportsCheck = [ "cutadapt" ];
 
   meta = with lib; {
     description = "Tool to remove adapter sequences from sequencing reads";

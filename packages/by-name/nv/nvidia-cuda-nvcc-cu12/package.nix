@@ -20,8 +20,8 @@ buildPythonPackage rec {
     hash = "sha256-tmu13WuK5iJiWGaRl307SkJekdthtLm8L2tCvNQVS5Y=";
   };
 
-  nativeBuildInputs = lib.optionals stdenv.hostPlatform.isLinux [autoPatchelfHook];
-  buildInputs = [(lib.getLib stdenv.cc.cc)];
+  nativeBuildInputs = lib.optionals stdenv.hostPlatform.isLinux [ autoPatchelfHook ];
+  buildInputs = [ (lib.getLib stdenv.cc.cc) ];
 
   # Remove namespace __init__.py to prevent collisions (PEP 420 implicit namespace)
   postInstall = ''
@@ -29,13 +29,13 @@ buildPythonPackage rec {
     rm -rf $out/lib/python*/site-packages/nvidia/__pycache__
   '';
 
-  pythonImportsCheck = ["nvidia.cuda_nvcc"];
+  pythonImportsCheck = [ "nvidia.cuda_nvcc" ];
 
   meta = {
     description = "CUDA compiler driver";
     homepage = "https://developer.nvidia.com/cuda-toolkit";
     license = lib.licenses.unfree;
-    platforms = ["x86_64-linux"];
-    maintainers = [];
+    platforms = [ "x86_64-linux" ];
+    maintainers = [ ];
   };
 }

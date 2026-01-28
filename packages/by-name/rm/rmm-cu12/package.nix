@@ -41,7 +41,10 @@ buildPythonPackage rec {
     description = "RAPIDS Memory Manager for GPU memory allocation";
     homepage = "https://github.com/rapidsai/rmm";
     license = lib.licenses.asl20;
-    platforms = ["x86_64-linux" "aarch64-linux"];
-    maintainers = [];
+    platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
+    maintainers = [ ];
   };
 }

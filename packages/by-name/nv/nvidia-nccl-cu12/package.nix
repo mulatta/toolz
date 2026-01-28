@@ -20,8 +20,8 @@ buildPythonPackage rec {
     hash = "sha256-sJcljZqrL6n2huM8b+QK5Xsn32DO29FdE5cBu1UJ4ME=";
   };
 
-  nativeBuildInputs = lib.optionals stdenv.hostPlatform.isLinux [autoPatchelfHook];
-  buildInputs = [(lib.getLib stdenv.cc.cc)];
+  nativeBuildInputs = lib.optionals stdenv.hostPlatform.isLinux [ autoPatchelfHook ];
+  buildInputs = [ (lib.getLib stdenv.cc.cc) ];
 
   # Remove namespace __init__.py to prevent collisions (PEP 420 implicit namespace)
   postInstall = ''
@@ -29,13 +29,13 @@ buildPythonPackage rec {
     rm -rf $out/lib/python*/site-packages/nvidia/__pycache__
   '';
 
-  pythonImportsCheck = ["nvidia.nccl"];
+  pythonImportsCheck = [ "nvidia.nccl" ];
 
   meta = {
     description = "NVIDIA Collective Communication Library (NCCL)";
     homepage = "https://developer.nvidia.com/nccl";
     license = lib.licenses.unfree;
-    platforms = ["x86_64-linux"];
-    maintainers = [];
+    platforms = [ "x86_64-linux" ];
+    maintainers = [ ];
   };
 }

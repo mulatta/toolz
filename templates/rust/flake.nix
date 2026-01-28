@@ -1,8 +1,9 @@
 {
   description = "PROJ_NAME - Rust project";
 
-  outputs = inputs @ {flake-parts, ...}:
-    flake-parts.lib.mkFlake {inherit inputs;} {
+  outputs =
+    inputs@{ flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
       systems = import inputs.systems;
 
       imports = [
@@ -12,26 +13,29 @@
         ./nix/formatter.nix
       ];
 
-      perSystem = {
-        lib,
-        self',
-        system,
-        ...
-      }: {
-        _module.args.pkgs = import inputs.nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-          overlays = [
-            inputs.rust-overlay.overlays.default
-          ];
-        };
+      perSystem =
+        {
+          lib,
+          self',
+          system,
+          ...
+        }:
+        {
+          _module.args.pkgs = import inputs.nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+            overlays = [
+              inputs.rust-overlay.overlays.default
+            ];
+          };
 
-        checks = let
-          packages = lib.mapAttrs' (n: lib.nameValuePair "package-${n}") self'.packages;
-          devShells = lib.mapAttrs' (n: lib.nameValuePair "devShell-${n}") self'.devShells;
-        in
-          {inherit (self') formatter;} // packages // devShells;
-      };
+          checks =
+            let
+              packages = lib.mapAttrs' (n: lib.nameValuePair "package-${n}") self'.packages;
+              devShells = lib.mapAttrs' (n: lib.nameValuePair "devShell-${n}") self'.devShells;
+            in
+            { inherit (self') formatter; } // packages // devShells;
+        };
     };
 
   inputs = {

@@ -1,8 +1,9 @@
 {
   description = "PROJ_NAME - Python project using uv2nix";
 
-  outputs = inputs @ {flake-parts, ...}:
-    flake-parts.lib.mkFlake {inherit inputs;} {
+  outputs =
+    inputs@{ flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
       systems = import inputs.systems;
 
       imports = [
@@ -12,23 +13,26 @@
         ./nix/formatter.nix
       ];
 
-      perSystem = {
-        lib,
-        self',
-        system,
-        ...
-      }: {
-        _module.args.pkgs = import inputs.nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        };
+      perSystem =
+        {
+          lib,
+          self',
+          system,
+          ...
+        }:
+        {
+          _module.args.pkgs = import inputs.nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
 
-        checks = let
-          packages = lib.mapAttrs' (n: lib.nameValuePair "package-${n}") self'.packages;
-          devShells = lib.mapAttrs' (n: lib.nameValuePair "devShell-${n}") self'.devShells;
-        in
-          {inherit (self') formatter;} // packages // devShells;
-      };
+          checks =
+            let
+              packages = lib.mapAttrs' (n: lib.nameValuePair "package-${n}") self'.packages;
+              devShells = lib.mapAttrs' (n: lib.nameValuePair "devShell-${n}") self'.devShells;
+            in
+            { inherit (self') formatter; } // packages // devShells;
+        };
     };
 
   inputs = {

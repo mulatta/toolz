@@ -25,9 +25,10 @@ buildPythonPackage rec {
     python = "py3";
     abi = "none";
     platform =
-      if stdenv.hostPlatform.isAarch64
-      then "manylinux_2_24_aarch64.manylinux_2_28_aarch64"
-      else "manylinux_2_24_x86_64.manylinux_2_28_x86_64";
+      if stdenv.hostPlatform.isAarch64 then
+        "manylinux_2_24_aarch64.manylinux_2_28_aarch64"
+      else
+        "manylinux_2_24_x86_64.manylinux_2_28_x86_64";
     hash = "sha256-wbSCz918t+mNtH2gill8yn0G61sRcRGP3IwAvvXhdCs=";
   };
 
@@ -74,8 +75,11 @@ buildPythonPackage rec {
     description = "RAPIDS RAFT library for GPU algorithms";
     homepage = "https://github.com/rapidsai/raft";
     license = lib.licenses.asl20;
-    platforms = ["x86_64-linux" "aarch64-linux"];
-    maintainers = [];
+    platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
+    maintainers = [ ];
     # NOTE: Depends on nvidia-nccl-cu12 which is unfree
     # Set NIXPKGS_ALLOW_UNFREE=1 or allowUnfree=true to build
   };

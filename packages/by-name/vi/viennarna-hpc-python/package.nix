@@ -29,7 +29,7 @@ buildPythonPackage {
     ${python.interpreter} setup.py install --prefix=$out
   '';
 
-  pythonImportsCheck = ["RNA"];
+  pythonImportsCheck = [ "RNA" ];
 
   meta = {
     description = "Python bindings for ViennaRNA HPC";

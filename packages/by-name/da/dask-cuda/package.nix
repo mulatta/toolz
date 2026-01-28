@@ -49,6 +49,6 @@ buildPythonPackage rec {
     homepage = "https://github.com/rapidsai/dask-cuda";
     license = lib.licenses.asl20;
     platforms = lib.platforms.linux;
-    maintainers = [];
+    maintainers = [ ];
   };
 }

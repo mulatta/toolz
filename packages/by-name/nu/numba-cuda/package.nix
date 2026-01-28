@@ -18,14 +18,14 @@ buildPythonPackage rec {
     hash = "sha256-GBYAyoy9xZhMO0GYiA9xApsRbf3gOXvO72Zv+DCnLJA=";
   };
 
-  build-system = [setuptools];
+  build-system = [ setuptools ];
 
   dependencies = [
     numba
     cuda-python # CUDA bindings for numba.cuda
   ];
 
-  pythonImportsCheck = ["numba_cuda"];
+  pythonImportsCheck = [ "numba_cuda" ];
 
   # Skip tests - they require CUDA hardware
   doCheck = false;
@@ -34,6 +34,6 @@ buildPythonPackage rec {
     description = "CUDA target for Numba - GPU acceleration support";
     homepage = "https://github.com/numba/numba-cuda";
     license = lib.licenses.bsd2;
-    maintainers = [];
+    maintainers = [ ];
   };
 }

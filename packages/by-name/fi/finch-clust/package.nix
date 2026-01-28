@@ -23,7 +23,7 @@ buildPythonPackage {
     hash = "sha256-Ay4KPG2gNxuplLdhPRYf6S29pcAk+eccYzzPxpBPAK4=";
   };
 
-  build-system = [setuptools];
+  build-system = [ setuptools ];
 
   dependencies = [
     scipy
@@ -33,10 +33,10 @@ buildPythonPackage {
 
   optional-dependencies = {
     # ANN (Approximate Nearest Neighbors) support via PyNNDescent for large datasets
-    ann = [pynndescent];
+    ann = [ pynndescent ];
   };
 
-  pythonImportsCheck = ["finch"];
+  pythonImportsCheck = [ "finch" ];
 
   meta = {
     description = "Parameter-free fast clustering algorithm using First Integer Neighbor relations";

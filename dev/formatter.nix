@@ -1,5 +1,6 @@
-{inputs, ...}: {
-  imports = [inputs.treefmt-nix.flakeModule];
+{ inputs, ... }:
+{
+  imports = [ inputs.treefmt-nix.flakeModule ];
   perSystem = {
     treefmt = {
       flakeCheck = true;
@@ -9,7 +10,7 @@
 
       programs = {
         # Nix formatters & linters
-        alejandra.enable = true;
+        nixfmt.enable = true;
         deadnix.enable = true;
         statix.enable = true;
 

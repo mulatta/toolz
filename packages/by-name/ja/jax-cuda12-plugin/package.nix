@@ -31,8 +31,8 @@ buildPythonPackage rec {
     hash = "sha256-25iLe6UGNIOpNt2/Fi8E0bRBLg1kNA8ReIx7vId+ikM=";
   };
 
-  nativeBuildInputs = lib.optionals stdenv.hostPlatform.isLinux [autoPatchelfHook];
-  buildInputs = [(lib.getLib stdenv.cc.cc)];
+  nativeBuildInputs = lib.optionals stdenv.hostPlatform.isLinux [ autoPatchelfHook ];
+  buildInputs = [ (lib.getLib stdenv.cc.cc) ];
 
   dependencies = [
     jax-cuda12-pjrt
@@ -48,13 +48,13 @@ buildPythonPackage rec {
     nvidia-nvjitlink-cu12
   ];
 
-  pythonImportsCheck = ["jax_cuda12_plugin"];
+  pythonImportsCheck = [ "jax_cuda12_plugin" ];
 
   meta = {
     description = "JAX Plugin for CUDA 12 (with-cuda extra)";
     homepage = "https://github.com/google/jax";
     license = lib.licenses.asl20;
-    platforms = ["x86_64-linux"];
-    maintainers = [];
+    platforms = [ "x86_64-linux" ];
+    maintainers = [ ];
   };
 }

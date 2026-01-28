@@ -29,7 +29,7 @@ buildPythonPackage rec {
 
   env.SETUPTOOLS_SCM_PRETEND_VERSION = version;
 
-  pythonImportsCheck = ["typeguard"];
+  pythonImportsCheck = [ "typeguard" ];
 
   # Tests require additional dependencies
   doCheck = false;

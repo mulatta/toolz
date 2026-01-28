@@ -22,9 +22,7 @@ buildPythonPackage rec {
     python = "py3";
     abi = "none";
     platform =
-      if stdenv.hostPlatform.isAarch64
-      then "manylinux_2_28_aarch64"
-      else "manylinux_2_28_x86_64";
+      if stdenv.hostPlatform.isAarch64 then "manylinux_2_28_aarch64" else "manylinux_2_28_x86_64";
     hash = "sha256-/H3kP9Af9PVnxASXvmk14iZktJz7mLMaeDST57mw/I4=";
   };
 
@@ -58,13 +56,16 @@ buildPythonPackage rec {
   # Skip tests - this is a binary wheel with CUDA dependencies
   doCheck = false;
 
-  pythonImportsCheck = ["libcudf"];
+  pythonImportsCheck = [ "libcudf" ];
 
   meta = {
     description = "C++ library for cuDF - GPU-accelerated dataframe operations";
     homepage = "https://github.com/rapidsai/cudf";
     license = lib.licenses.asl20;
-    platforms = ["x86_64-linux" "aarch64-linux"];
-    maintainers = [];
+    platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
+    maintainers = [ ];
   };
 }

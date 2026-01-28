@@ -21,13 +21,13 @@ buildPythonPackage rec {
     hash = "sha256-I3SaZXEZGiFct00c2/9KhuexnxIAwHGz/PhEpb6iOi8=";
   };
 
-  nativeBuildInputs = lib.optionals stdenv.hostPlatform.isLinux [autoPatchelfHook];
+  nativeBuildInputs = lib.optionals stdenv.hostPlatform.isLinux [ autoPatchelfHook ];
   buildInputs = [
     (lib.getLib stdenv.cc.cc)
     nvidia-nvjitlink-cu12
   ];
 
-  dependencies = [nvidia-nvjitlink-cu12];
+  dependencies = [ nvidia-nvjitlink-cu12 ];
 
   # Remove namespace __init__.py to prevent collisions (PEP 420 implicit namespace)
   postInstall = ''
@@ -40,13 +40,13 @@ buildPythonPackage rec {
     addAutoPatchelfSearchPath "${nvidia-nvjitlink-cu12}/${nvidia-nvjitlink-cu12.pythonModule.sitePackages}/nvidia/nvjitlink/lib"
   '';
 
-  pythonImportsCheck = ["nvidia.cusparse"];
+  pythonImportsCheck = [ "nvidia.cusparse" ];
 
   meta = {
     description = "CUSPARSE native runtime libraries";
     homepage = "https://developer.nvidia.com/cusparse";
     license = lib.licenses.unfree;
-    platforms = ["x86_64-linux"];
-    maintainers = [];
+    platforms = [ "x86_64-linux" ];
+    maintainers = [ ];
   };
 }

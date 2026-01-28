@@ -5,7 +5,7 @@
 # CUDA compatibility wrapper for PyPI wheels
 # Provides standard .so symlinks to Nix CUDA .alt.so libraries
 # This allows PyPI wheels (cupy, numba) to find CUDA libraries via dlopen()
-runCommand "cuda-compat" {} ''
+runCommand "cuda-compat" { } ''
     mkdir -p $out/lib
 
     # NVIDIA Runtime Compilation (nvrtc)
@@ -48,7 +48,10 @@ runCommand "cuda-compat" {} ''
       This package provides standard .so symlinks that PyPI wheels (cupy, numba)
       expect when using dlopen() to load CUDA libraries dynamically.
     '';
-    platforms = ["x86_64-linux" "aarch64-linux"];
-    maintainers = [];
+    platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
+    maintainers = [ ];
   };
 }

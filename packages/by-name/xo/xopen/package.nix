@@ -25,14 +25,13 @@ buildPythonPackage rec {
     setuptools-scm
   ];
 
-  buildInputs = [zlib-ng];
+  buildInputs = [ zlib-ng ];
 
   propagatedBuildInputs =
-    lib.optionals stdenv.isLinux [isal]
-    ++ lib.optionals (pythonOlder "3.10") [importlib-metadata];
+    lib.optionals stdenv.isLinux [ isal ] ++ lib.optionals (pythonOlder "3.10") [ importlib-metadata ];
 
   dontCheckRuntimeDeps = true;
-  pythonImportsCheck = ["xopen"];
+  pythonImportsCheck = [ "xopen" ];
 
   meta = with lib; {
     description = "Open compressed files transparently";
